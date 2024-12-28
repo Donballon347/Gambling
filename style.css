@@ -1,0 +1,277 @@
+/* Reset and base styles  */
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Links */
+
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Common */
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+    display: block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+ul,
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+address {
+    font-style: normal;
+}
+
+/* Form */
+
+input,
+textarea,
+button,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button,
+input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+legend {
+    display: block;
+}
+
+/* ----------------------------------------------------------------------------------------------------------------*/
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #1c1c1c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("images/back.webp");
+    background-size: cover;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header__logo {
+    font-family: 'Fatal (TRIAL)';
+    color: white;
+    font-size: 50px;
+}
+
+header .user-icon {
+    font-size: 24px;
+}
+
+.container {
+    text-align: center;
+}
+
+.case {
+    margin: 20px auto;
+}
+
+.case img {
+    width: 150px;
+}
+
+.case-content {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.case-item {
+    text-align: center;
+}
+
+.case-item img {
+    width: 60px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.case-item p {
+    margin: 5px 0 0;
+    font-size: 12px;
+}
+
+/* --INDEX---------------------------------------------------------------------------------------------------------------- */
+.container__index {
+    font-family: 'Actinia';
+    font-size: 30px;
+}
+
+.index__question {
+    font-size: 40px;
+    padding-bottom: 50px;
+}
+
+.index__choice {
+    padding-bottom: 50px;
+}
+
+.index__tablets {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tablets img {
+    opacity: 95%;
+    height: 220px;
+    padding: 0 75px;
+}
+
+.tablets__1 {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.tablets__1 img {
+    transition: transform 3s cubic-bezier(0.5, 0.5, 0, 1);
+}
+
+.tablets__1:hover img {
+    transform: rotate(360deg);
+}
+
+.tablets__2 {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.tablets__2 img {
+    transition: transform 3s cubic-bezier(0.5, 0.5, 0, 1);
+}
+
+.tablets__2:hover img {
+    transform: rotate(360deg);
+}
+
+
+/* --RED-------------------------------------------------------- */
+.container_pill {
+    font-family: 'Actinia';
+}
+
+.pill__question {
+    font-size: 50px;
+    padding-bottom: 10px;
+}
+
+.pill__decision {
+    font-size: 25px;
+    color: white;
+    padding-bottom: 60px;
+}
+
+.pill__decision:hover {
+    text-decoration: underline;
+}
+
+.open-button {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 20px 40px;
+    font-size: 22px;
+    color: black;
+    background: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
