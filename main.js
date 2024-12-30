@@ -36,11 +36,11 @@ document.querySelector('.open-button').addEventListener('click', () => {
     { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "100 523$", weight: 1 },
     { name: "Шарм", img: "images/skins/MAC-10 Шарм.png", rarity: "rarity-purple", title: "MAC-10", price: "45$", weight: 1 },
     { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "193$", weight: 1 },
-    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "10 000$", weight: 2 }
+    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "10 000$", weight: 1 }
   ];
 
   const minVisibleItems = 10; // Минимальное количество видимых скинов для длинной рулетки
-  const totalItems = Math.max(minVisibleItems, items.length * 3); // Увеличиваем количество элементов
+  const totalItems = Math.max(minVisibleItems, items.length * 10); // Увеличиваем количество элементов
   console.log(`totalItems: ${totalItems}`);
 
   // Добавляем элементы рулетки
@@ -86,9 +86,11 @@ document.querySelector('.open-button').addEventListener('click', () => {
     const stopPosition = itemIndex * 160 + (totalWidth / 2 - 160); // Рассчитываем позицию на рулетке (160px)
 
     // Анимация рулетки налево
-    const animationDistance = itemIndex * 160 + (totalWidth / 2 - 160) + 320; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
+    const animationDistance = stopPosition + 160; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
     // const animationDistance = stopPosition + (totalWidth / 2 - 160); // Рассчитываем смещение налево, чтобы элемент был по центру
-    roulette.style.transition = "transform 3s ease-out"; // Добавляем плавный переход
+    // roulette.style.transition = "transform 3s ease-out"; // Добавляем плавный переход
+    roulette.style.transition = "transform 3s cubic-bezier(.07,.97, 1,.5)"; // Добавляем плавный переход
+    // roulette.style.transition = "transform 3s cubic-bezier(.16,2.05,.9,-1.26)"; // Добавляем плавный переход
     roulette.style.transform = `translateX(-${animationDistance}px)`; // Смещение в отрицательную сторону
 
     console.log(`stopIndex: ${stopIndex}`);
