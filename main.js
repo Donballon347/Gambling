@@ -63,14 +63,13 @@ document.querySelector('.open-button').addEventListener('click', () => {
           <p class="card-title">${item.title}</p>
           <p class="card-skin">${item.name}</p>
         </div>
-        <p class="card-price">${item.price}</p>
       </div>
     `;
     roulette.appendChild(rouletteItem);
   }
 
   // Устанавливаем ширину рулетки
-  const totalWidth = totalItems * 160; // Ширина рулетки с учетом всех элементов (ширина карточки 160px)
+  const totalWidth = totalItems * 200; // Ширина рулетки с учетом всех элементов (ширина карточки 200px)
   roulette.style.width = `${totalWidth}px`;
 
   // Устанавливаем начальное смещение рулетки
@@ -83,12 +82,12 @@ document.querySelector('.open-button').addEventListener('click', () => {
     // const stopIndex = itemIndex + Math.floor(totalItems / items.length) * items.length;
     const stopIndex = (itemIndex + Math.floor(totalItems / items.length) * items.length) % totalItems;
 
-    //const stopPosition = stopIndex * 160; // Рассчитываем позицию на рулетке (160px)
-    const stopPosition = itemIndex * 160 + (totalWidth / 2 - 160); // Рассчитываем позицию на рулетке (160px)
+    //const stopPosition = stopIndex * 200; // Рассчитываем позицию на рулетке (200px)
+    const stopPosition = itemIndex * 200 + (totalWidth / 2 - 200); // Рассчитываем позицию на рулетке (200px)
 
     // Анимация рулетки налево
-    const animationDistance = stopPosition + 160; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
-    // const animationDistance = stopPosition + (totalWidth / 2 - 160); // Рассчитываем смещение налево, чтобы элемент был по центру
+    const animationDistance = stopPosition + 200; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
+    // const animationDistance = stopPosition + (totalWidth / 2 - 200); // Рассчитываем смещение налево, чтобы элемент был по центру
     // roulette.style.transition = "transform 3s ease-out"; // Добавляем плавный переход
     roulette.style.transition = "transform 3s cubic-bezier(.07,.97, 1,.05)"; // Добавляем плавный переход
     // roulette.style.transition = "transform 3s cubic-bezier(.16,2.05,.9,-1.26)"; // Добавляем плавный переход
