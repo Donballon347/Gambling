@@ -1,3 +1,18 @@
+function getRandomItemWithWeight(items) {
+  const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+  let random = Math.random() * totalWeight;
+
+  console.log(`Total weight: ${totalWeight}, Random value: ${random}`);  // Логируем для отладки
+
+  for (const item of items) {
+    console.log(`Checking item: ${item.name}, Weight: ${item.weight}, Random left: ${random}`);  // Логируем шаги выбора
+    if (random < item.weight) {
+      return item;
+    }
+    random -= item.weight;
+  }
+}
+
 document.querySelector('.open-button').addEventListener('click', () => {
   console.log("Кнопка нажата!");
 
@@ -16,46 +31,74 @@ document.querySelector('.open-button').addEventListener('click', () => {
   // Очищаем рулетку
   roulette.innerHTML = '';
 
+  // Данные скинов
   const items = [
-    { name: "Black Steel", img: "images/skins/glock.png" },
-    { name: "Zebra", img: "images/skins/glock.png" },
-    { name: "Swirlie Belle", img: "images/skins/glock.png" },
-    { name: "Rainbow Bash", img: "images/skins/glock.png" },
-    { name: "Fluttershy", img: "images/skins/glock.png" }
+    { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "100 523$", weight: 1 },
+    { name: "Шарм", img: "images/skins/MAC-10 Шарм.png", rarity: "rarity-purple", title: "MAC-10", price: "45$", weight: 1 },
+    { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "193$", weight: 1 },
+    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "10 000$", weight: 2 }
   ];
 
   const minVisibleItems = 10; // Минимальное количество видимых скинов для длинной рулетки
   const totalItems = Math.max(minVisibleItems, items.length * 3); // Увеличиваем количество элементов
+  console.log(`totalItems: ${totalItems}`);
 
   // Добавляем элементы рулетки
   for (let i = 0; i < totalItems; i++) {
     const item = items[i % items.length]; // Повторяем элементы
     const rouletteItem = document.createElement('div');
-    rouletteItem.classList.add('roulette-item');
-    rouletteItem.innerHTML = `<img src="${item.img}" alt="${item.name}">`;
+    rouletteItem.classList.add('roulette-item', 'skin-card');
+
+    // Вставляем HTML-код карточки
+    rouletteItem.innerHTML = `
+      <div class="card-background">
+        <img src="images/snakes.webp" alt="card-background" />
+      </div>
+      <div class="card-image">
+        <img src="${item.img}" alt="${item.title}" />
+      </div>
+      <div class="card-info ${item.rarity}">
+        <div class="card-info__name">
+          <p class="card-title">${item.title}</p>
+          <p class="card-skin">${item.name}</p>
+        </div>
+        <p class="card-price">${item.price}</p>
+      </div>
+    `;
     roulette.appendChild(rouletteItem);
   }
 
   // Устанавливаем ширину рулетки
-  const totalWidth = totalItems * 100; // Ширина рулетки с учетом всех элементов
+  const totalWidth = totalItems * 160; // Ширина рулетки с учетом всех элементов (ширина карточки 160px)
   roulette.style.width = `${totalWidth}px`;
 
   // Устанавливаем начальное смещение рулетки
-  roulette.style.transform = `translateX(0)`; // Начинаем с позиции 0
+  roulette.style.transform = `translateX(0px)`; // Начинаем с позиции 0
 
-  // Добавляем задержку перед запуском анимации
+  // Анимация рулетки
   setTimeout(() => {
-    const stopIndex = Math.floor(Math.random() * items.length); // Индекс конечного элемента
-    const stopPosition = stopIndex * 100; // Позиция остановки (слева)
+    const resultItem = getRandomItemWithWeight(items); // Выбираем скин с учетом весов
+    const itemIndex = items.indexOf(resultItem); // Индекс выбранного скина в оригинальном массиве
+    // const stopIndex = itemIndex + Math.floor(totalItems / items.length) * items.length;
+    const stopIndex = (itemIndex + Math.floor(totalItems / items.length) * items.length) % totalItems;
+
+    //const stopPosition = stopIndex * 160; // Рассчитываем позицию на рулетке (160px)
+    const stopPosition = itemIndex * 160 + (totalWidth / 2 - 160); // Рассчитываем позицию на рулетке (160px)
 
     // Анимация рулетки налево
-    const animationDistance = stopPosition + totalWidth / 2; // Рассчитываем смещение налево
+    const animationDistance = itemIndex * 160 + (totalWidth / 2 - 160) + 320; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
+    // const animationDistance = stopPosition + (totalWidth / 2 - 160); // Рассчитываем смещение налево, чтобы элемент был по центру
+    roulette.style.transition = "transform 3s ease-out"; // Добавляем плавный переход
     roulette.style.transform = `translateX(-${animationDistance}px)`; // Смещение в отрицательную сторону
 
-    // Определяем результат
+    console.log(`stopIndex: ${stopIndex}`);
+    console.log(`stopPosition: ${stopPosition}`);
+    console.log(`Общая длина рулетки: ${totalWidth}`);
+    console.log(`Количество элементов: ${totalItems}`);
+
+    // Показываем результат
     setTimeout(() => {
-      const resultIndex = stopIndex % items.length;
-      alert(`Вы выбили: ${items[resultIndex].name}`);
+      alert(`Вы выбили: ${resultItem.name}`);
     }, 3000); // Убедитесь, что это совпадает с временем анимации
-  }, 100); // Минимальная задержка для применения transition
+  }, 100);
 });
