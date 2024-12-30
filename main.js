@@ -33,11 +33,11 @@ document.querySelector('.open-button').addEventListener('click', () => {
 
   // Данные скинов
   const items = [
-    { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "100 523$", weight: 1 },
+    { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "124$", weight: 1 },
     { name: "Шарм", img: "images/skins/MAC-10 Шарм.png", rarity: "rarity-purple", title: "MAC-10", price: "45$", weight: 1 },
     { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "193$", weight: 1 },
     { name: "История о драконе", img: "images/skins/AWP Dragon Lore.png", rarity: "rarity-red", title: "AWP", price: "10 000$", weight: 1111 },
-    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "10 000$", weight: 1 }
+    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "500$", weight: 1 }
   ];
 
   const minVisibleItems = 10; // Минимальное количество видимых скинов для длинной рулетки
