@@ -156,6 +156,16 @@ header .user-icon {
     font-size: 24px;
 }
 
+.user-icon img {
+    width: 60px;
+    height: auto;
+    transition: transform 0.7s ease;
+}
+
+.user-icon img:hover {
+    transform: rotate(-180deg);
+}
+
 .container {
     text-align: center;
 }
