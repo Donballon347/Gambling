@@ -1,31 +1,34 @@
-// Импортируем библиотеки
 const express = require('express');
-const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
-// Создаем приложение
 const app = express();
+const PORT = 3000;
 
-// Устанавливаем порт
-const port = 3000;
+// Простая база данных в памяти
+const users = [
+    { username: 'admin', password: '1234' }, // Пример пользователя
+];
 
-// Подключение к базе данных MongoDB
-mongoose.connect('mongodb://localhost/myDatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+// Middleware для обработки данных формы
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Статическая папка для HTML
+app.use(express.static('public'));
+
+// Маршрут для обработки логина
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Проверяем пользователя
+    const user = users.find(u => u.username === username && u.password === password);
+    if (user) {
+        res.send('<h1>Welcome, ' + username + '!</h1>');
+    } else {
+        res.status(401).send('<h1>Invalid credentials</h1>');
+    }
 });
 
-const db = mongoose.connection;
-
-// Обработка ошибок подключения
-db.on('error', (error) => console.error(error));
-db.once('open', () => console.log('Connected to MongoDB'));
-
-// Простая маршрутная обработка
-app.get('/', (req, res) => {
-  res.send('Hello, world! This is my backend!');
-});
-
-// Сервер слушает указанный порт
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// Запуск сервера
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
