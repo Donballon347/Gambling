@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Гэмблинг</title>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+   <link href="/css/style.css" rel="stylesheet" />
+   <link href="/fonts/stylesheet.css" rel="stylesheet" />
+</head>
+
+<body>
+   <header>
+      <div class="burger">---</div>
+      <h1>
+         <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
+      </h1>
+      <div class="user-icon">
+         <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
+      </div>
+   </header>
+   <div class="container container__index">
+      <!-- Проверяем, авторизован ли пользователь -->
+      <% if (user) { %>
+         <!-- Личный кабинет -->
+         <h2>Добро пожаловать, <%= user.username %>!</h2>
+         <p>Здесь будет информация о вашем аккаунте.</p>
+         <a href="/logout">Выход</a>
+      <% } else { %>
+         <!-- Форма логина -->
+         <h2>Авторизация</h2>
+         <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="Логин" required />
+            <input type="password" name="password" placeholder="Пароль" required />
+            <button type="submit">Войти</button>
+         </form>
+      <% } %>
+   </div>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Гэмблинг</title>
+   <link href="css/style.css" rel="stylesheet" />
+   <link href="css/redPill.css" rel="stylesheet" />
+   <link href="../fonts/stylesheet.css" rel="stylesheet" />
+</head>
+
+<body>
+   <header>
+      <div class="burger">---</div>
+      <h1>
+         <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
+      </h1>
+      <div class="user-icon">&#x1F464;</div>
+   </header>
+
+   <div class="container container_pill">
+      <% if (user) { %>
+         <h2 class="pill__question">Ты уверен, что хочешь этого?</h2>
+         <a href="/" class="pill__decision">Сделать выбор заново</a>
+         <div class="case">
+            <img class="crate__image" src="../images/wood.png" alt="case" />
+            <div class="roulette-wrapper" style="display: none;">
+               <div class="center-indicator"></div>
+               <div class="roulette"></div>
+            </div>
+         </div>
+
+         <button class="open-button">ОТКРЫТЬ</button>
+
+         <h2>Содержимое кейса</h2>
+         <div class="case-content">
+            <div class="skin-card">
+               <div class="card-background">
+                  <img src="../images/snakes.webp" alt="card-background" />
+               </div>
+               <div class="card-image">
+                  <img src="../images/skins/Glock Прозрачный полимер.png" alt="Glock-18" />
+               </div>
+               <div class="card-info rarity-blue">
+                  <div class="card-info__name">
+                     <p class="card-title">Glock-18</p>
+                     <p class="card-skin">Прозрачный полимер</p>
+                  </div>
+               </div>
+            </div>
+
+            <div class="skin-card">
+               <div class="card-background">
+                  <img src="../images/snakes.webp" alt="card-background" />
+               </div>
+               <div class="card-image">
+                  <img src="../images/skins/MAC-10 Шарм.png" alt="MAC-10" />
+               </div>
+               <div class="card-info rarity-purple">
+                  <div class="card-info__name">
+                     <p class="card-title">MAC-10</p>
+                     <p class="card-skin">Шарм</p>
+                  </div>
+               </div>
+            </div>
+
+            <div class="skin-card">
+               <div class="card-background">
+                  <img src="../images/snakes.webp" alt="card-background" />
+               </div>
+               <div class="card-image">
+                  <img src="../images/skins/Dual Berettas Плод воображения.png" alt="DB" />
+               </div>
+               <div class="card-info rarity-pink">
+                  <div class="card-info__name">
+                     <p class="card-title">Dual Berettas</p>
+                     <p class="card-skin">Плод воображения</p>
+                  </div>
+               </div>
+            </div>
+
+            <div class="skin-card">
+               <div class="card-background">
+                  <img src="../images/snakes.webp" alt="card-background" />
+               </div>
+               <div class="card-image">
+                  <img src="../images/skins/ak47.png" alt="ak47" />
+               </div>
+               <div class="card-info rarity-red">
+                  <div class="card-info__name">
+                     <p class="card-title">AK-47</p>
+                     <p class="card-skin">Неоновая революция</p>
+                  </div>
+               </div>
+            </div>
+
+            <div class="skin-card">
+               <div class="card-background">
+                  <img src="../images/snakes.webp" alt="card-background" />
+               </div>
+               <div class="card-image">
+                  <img src="../images/skins/AWP Dragon lore.png" alt="AWP" />
+               </div>
+               <div class="card-info rarity-red">
+                  <div class="card-info__name">
+                     <p class="card-title">AWP</p>
+                     <p class="card-skin">История о драконе</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <% } else { %>
+           <p>Для доступа к содержимому, пожалуйста, <a href="/account">авторизуйтесь</a>.</p>
+         <% } %>
+   </div>
+   <script src="js/main.js"></script>
+</body>
+
+</html>
