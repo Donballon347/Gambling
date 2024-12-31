@@ -1,0 +1,24 @@
+{
+  "name": "gambling",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Donballon347/Gambling.git"
+  },
+  "keywords": [],
+  "author": "Opasniy Laleyl",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Donballon347/Gambling/issues"
+  },
+  "homepage": "https://github.com/Donballon347/Gambling#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
