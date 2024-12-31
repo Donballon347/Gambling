@@ -26,6 +26,21 @@
          <!-- Личный кабинет -->
          <h2>Добро пожаловать, <%= user.username %>!</h2>
          <p>Здесь будет информация о вашем аккаунте.</p>
+         
+         <% if (selectedSkin) { %>
+            <!-- Отображаем информацию о выбранном скине -->
+            <h3>Вы выбили скин!</h3>
+            <div class="skin-info">
+               <img src="<%= selectedSkin.img %>" alt="<%= selectedSkin.title %>" />
+               <p>Название: <%= selectedSkin.name %></p>
+               <p>Оружие: <%= selectedSkin.title %></p>
+               <p>Цена: <%= selectedSkin.price %></p>
+               <p>Редкость: <%= selectedSkin.rarity %></p>
+            </div>
+         <% } else { %>
+            <p>Вы ещё не выбрали скин. Пройдите в рулетку и выбейте свой скин!</p>
+         <% } %>
+         
          <a href="/logout">Выход</a>
       <% } else { %>
          <!-- Форма логина -->

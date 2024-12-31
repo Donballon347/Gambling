@@ -101,6 +101,31 @@ document.querySelector('.open-button').addEventListener('click', () => {
     // Показываем результат
     setTimeout(() => {
       alert(`Вы выбили: ${resultItem.name}`);
+      // Отправка данных на сервер
+      fetch('/saveSkin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          skinName: resultItem.name,
+          skinTitle: resultItem.title,
+          skinImage: resultItem.img,
+          skinPrice: resultItem.price,
+          rarity: resultItem.rarity,
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Скин успешно добавлен в базу данных');
+        } else {
+          console.log('Ошибка при добавлении скина');
+        }
+      })
+      .catch(error => {
+        console.error('Ошибка при отправке данных на сервер:', error);
+      });
     }, 3000); // Убедитесь, что это совпадает с временем анимации
   }, 100);
 });
