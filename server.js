@@ -58,7 +58,7 @@ app.post('/register', async (req, res) => {
     const newUser = new User({ username, password });
     try {
         await newUser.save();
-        res.redirect('/login');
+        res.redirect('/account');
     } catch (err) {
         res.status(500).send('Error during registration');
     }
@@ -126,6 +126,11 @@ app.post('/saveSkin', async (req, res) => {
 app.get('/', (req, res) => {
     const user = req.session.user; // Получаем информацию о пользователе из сессии
     res.render('index', { user }); // Передаем данные пользователя в шаблон
+});
+
+app.get('/redPill', (req, res) => {
+    const user = req.session.user; // Получаем информацию о пользователе из сессии
+    res.render('redPill', { user }); // Передаем данные пользователя в шаблон
 });
 
 // Страница аккаунта

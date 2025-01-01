@@ -13,8 +13,8 @@
 }
 
 .case.active {
-   /* border: 2px solid white; */
-   /* Добавляем рамку только при активности */
+   margin-top: 50px;
+   margin-bottom: 50px;
 }
 
 .case-image {

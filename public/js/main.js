@@ -16,6 +16,9 @@ function getRandomItemWithWeight(items) {
 document.querySelector('.open-button').addEventListener('click', () => {
   console.log("Кнопка нажата!");
 
+  // Скрываем кнопку после нажатия
+  document.querySelector('.open-button').style.display = 'none';
+
   const caseContainer = document.querySelector('.case'); // Контейнер кейса
   const caseImage = document.querySelector('.crate__image'); // Изображение кейса
   const rouletteWrapper = document.querySelector('.roulette-wrapper'); // Рулетка
@@ -79,18 +82,13 @@ document.querySelector('.open-button').addEventListener('click', () => {
   setTimeout(() => {
     const resultItem = getRandomItemWithWeight(items); // Выбираем скин с учетом весов
     const itemIndex = items.indexOf(resultItem); // Индекс выбранного скина в оригинальном массиве
-    // const stopIndex = itemIndex + Math.floor(totalItems / items.length) * items.length;
     const stopIndex = (itemIndex + Math.floor(totalItems / items.length) * items.length) % totalItems;
 
-    //const stopPosition = stopIndex * 200; // Рассчитываем позицию на рулетке (200px)
     const stopPosition = itemIndex * 200 + (totalWidth / 2 - 200); // Рассчитываем позицию на рулетке (200px)
 
     // Анимация рулетки налево
     const animationDistance = stopPosition + 200; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
-    // const animationDistance = stopPosition + (totalWidth / 2 - 200); // Рассчитываем смещение налево, чтобы элемент был по центру
-    // roulette.style.transition = "transform 3s ease-out"; // Добавляем плавный переход
     roulette.style.transition = "transform 3s cubic-bezier(.07,.97, 1,.05)"; // Добавляем плавный переход
-    // roulette.style.transition = "transform 3s cubic-bezier(.16,2.05,.9,-1.26)"; // Добавляем плавный переход
     roulette.style.transform = `translateX(-${animationDistance}px)`; // Смещение в отрицательную сторону
 
     console.log(`stopIndex: ${stopIndex}`);

@@ -44,12 +44,28 @@
          <a href="/logout">Выход</a>
       <% } else { %>
          <!-- Форма логина -->
-         <h2>Авторизация</h2>
-         <form action="/login" method="POST">
-            <input type="text" name="username" placeholder="Логин" required />
-            <input type="password" name="password" placeholder="Пароль" required />
-            <button type="submit">Войти</button>
-         </form>
+         <div id="login-form" class="form-section">
+            <h2>Авторизация</h2>
+            <form action="/login" method="POST">
+               <input type="text" name="username" placeholder="Логин" required />
+               <input type="password" name="password" placeholder="Пароль" required />
+               <button type="submit">Войти</button>
+            </form>
+            <button id="switch-to-register">Нет аккаунта?</button>
+         </div>
+
+         <!-- Форма регистрации -->
+         <div id="register-form" class="form-section" style="display: none;">
+            <h2>Регистрация</h2>
+            <form action="/register" method="POST">
+               <input type="text" name="username" placeholder="Логин" required />
+               <input type="password" name="password" placeholder="Пароль" required />
+               <button type="submit">Зарегистрироваться</button>
+            </form>
+            <button id="switch-to-login">Уже есть аккаунт?</button>
+         </div>
+
+         <script src="/js/account.js"></script>
       <% } %>
    </div>
 </body>
