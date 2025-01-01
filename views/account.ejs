@@ -14,36 +14,44 @@
    <header>
       <div class="burger">---</div>
       <h1>
-         <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
+        <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
       </h1>
+      <% if (user) { %>
+        <p id="user-balance"><%= user.balance %> монет</p>
+      <% } %>
       <div class="user-icon">
-         <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
+        <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
       </div>
-   </header>
+    </header>
    <div class="container container__index">
       <!-- Проверяем, авторизован ли пользователь -->
       <% if (user) { %>
          <!-- Личный кабинет -->
          <h2>Добро пожаловать, <%= user.username %>!</h2>
-         <p>Здесь будет информация о вашем аккаунте.</p>
-         
-         <% if (selectedSkin) { %>
-            <!-- Отображаем информацию о выбранном скине -->
-            <h3>Вы выбили скин!</h3>
-            <div class="skin-info">
-               <img src="<%= selectedSkin.img %>" alt="<%= selectedSkin.title %>" />
-               <p>Название: <%= selectedSkin.name %></p>
-               <p>Оружие: <%= selectedSkin.title %></p>
-               <p>Цена: <%= selectedSkin.price %></p>
-               <p>Редкость: <%= selectedSkin.rarity %></p>
+         <h3 class="inventory-title">Ваш инвентарь:</h3>
+         <% if (selectedSkins && selectedSkins.length > 0) { %>
+            <div class="inventory-grid">
+               <% selectedSkins.forEach(skin => { %>
+                  <div class="skin-card">
+                     <div class="card-image">
+                        <img src="<%= skin.img %>" alt="<%= skin.title %>" />
+                     </div>
+                     <div class="card-info <%= skin.rarity %>">
+                        <div class="card-info__name">
+                           <p class="card-title"><%= skin.title %></p>
+                           <p class="card-skin"><%= skin.name %></p>
+                        </div>
+                        <p class="card-price">Цена: <%= skin.price %></p>
+                     </div>
+                  </div>
+               <% }) %>
             </div>
          <% } else { %>
-            <p>Вы ещё не выбрали скин. Пройдите в рулетку и выбейте свой скин!</p>
+            <p>Ваш инвентарь пуст, отправляйтесь на лудку!</p>
          <% } %>
-         
          <a href="/logout">Выход</a>
       <% } else { %>
-         <!-- Форма логина -->
+         <!-- Форма логина и регистрации -->
          <div id="login-form" class="form-section">
             <h2>Авторизация</h2>
             <form action="/login" method="POST">

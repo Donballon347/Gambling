@@ -16,6 +16,9 @@
     <h1>
       <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
     </h1>
+    <% if (user) { %>
+      <p id="user-balance"><%= user.balance %> монет</p>
+    <% } %>
     <div class="user-icon">
       <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
     </div>
@@ -28,8 +31,11 @@
         <div class="tablets__1">
           <a href="redPill"><img src="images/red_pillow.png" alt="red pillow" /></a>
         </div>
-        <div class="tablets__2">
+        <!-- <div class="tablets__2">
           <img src="images/blue_pillow.png" alt="blue pillow" />
+        </div> -->
+        <div class="tablets__2">
+          <a href="bluePill"><img src="images/blue_pillow.png" alt="blue pillow" /></a>
         </div>
       </div>
     <% } else { %>

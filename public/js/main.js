@@ -39,7 +39,7 @@ document.querySelector('.open-button').addEventListener('click', () => {
     { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "124$", weight: 1 },
     { name: "Шарм", img: "images/skins/MAC-10 Шарм.png", rarity: "rarity-purple", title: "MAC-10", price: "45$", weight: 1 },
     { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "193$", weight: 1 },
-    { name: "История о драконе", img: "images/skins/AWP Dragon Lore.png", rarity: "rarity-red", title: "AWP", price: "10 000$", weight: 1111 },
+    { name: "История о драконе", img: "images/skins/AWP Dragon Lore.png", rarity: "rarity-red", title: "AWP", price: "10 000$", weight: 1 },
     { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "500$", weight: 1 }
   ];
 
@@ -113,17 +113,43 @@ document.querySelector('.open-button').addEventListener('click', () => {
           rarity: resultItem.rarity,
         })
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          console.log('Скин успешно добавлен в базу данных');
-        } else {
-          console.log('Ошибка при добавлении скина');
-        }
-      })
-      .catch(error => {
-        console.error('Ошибка при отправке данных на сервер:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            console.log('Скин успешно добавлен в базу данных');
+          } else {
+            console.log('Ошибка при добавлении скина');
+          }
+        })
+        .catch(error => {
+          console.error('Ошибка при отправке данных на сервер:', error);
+        });
     }, 3000); // Убедитесь, что это совпадает с временем анимации
   }, 100);
+
+  // Пример обработки ответа от сервера после открытия кейса
+  fetch('/openCase', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ /* данные запроса */ })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        // Обновляем отображение баланса на странице
+        document.querySelector('#user-balance').textContent = `Ваш баланс: ${data.balance} монет`;
+      } else {
+        console.error('Ошибка при открытии кейса');
+      }
+    })
+    .catch(error => {
+      console.error('Ошибка при отправке запроса на сервер:', error);
+    });
 });

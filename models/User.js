@@ -4,14 +4,17 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
-  selectedSkin: {
-    name: String,
-    img: String,
-    rarity: String,
-    title: String,
-    price: String,
-    weight: { type: Number, default: 1 }, // Если вес важен, оставляем его
-  },
+  balance: { type: Number, default: 0 },
+  selectedSkins: [
+    {
+      name: String,
+      img: String,
+      rarity: String,
+      title: String,
+      price: String,
+      weight: { type: Number, default: 1 },
+    }
+  ],
 });
 
 // Создание модели

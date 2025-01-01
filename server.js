@@ -2,30 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
+const User = require('./models/User'); // Подключаем единую схему
 
 const app = express();
 const PORT = 3000;
 
 // Подключение к MongoDB
-mongoose.connect('mongodb+srv://admin:1234@cluster0.lltuv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose
+    .connect('mongodb+srv://admin:1234@cluster0.lltuv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
-
-// Создание схемы и модели для пользователя
-const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    selectedSkin: {
-        name: String,
-        img: String,
-        rarity: String,
-        title: String,
-        price: String,
-        weight: Number,
-    },
-});
-
-const User = mongoose.model('User', userSchema);
 
 // Middleware для обработки данных формы
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -103,7 +89,7 @@ app.post('/saveSkin', async (req, res) => {
 
     const { skinName, skinTitle, skinImage, skinPrice, rarity } = req.body; // Получаем информацию о скине
 
-    const selectedSkin = {
+    const newSkin = {
         name: skinName,
         img: skinImage,
         rarity: rarity,
@@ -112,10 +98,10 @@ app.post('/saveSkin', async (req, res) => {
         weight: 1, // Или другое значение, в зависимости от вашего логики
     };
 
-    // Обновляем выбранный скин в базе данных для пользователя
+    // Добавляем новый скин в массив selectedSkins
     try {
-        await User.updateOne({ username: user.username }, { $set: { selectedSkin } });
-        res.json({ success: true, skin: selectedSkin }); // Отправляем обратно информацию о выбранном скине
+        await User.updateOne({ username: user.username }, { $push: { selectedSkins: newSkin } });
+        res.json({ success: true, skin: newSkin }); // Отправляем обратно информацию о добавленном скине
     } catch (err) {
         console.error('Ошибка при сохранении скина:', err);
         res.status(500).send('Ошибка при сохранении скина');
@@ -123,30 +109,123 @@ app.post('/saveSkin', async (req, res) => {
 });
 
 // Главная страница с рендерингом EJS
-app.get('/', (req, res) => {
-    const user = req.session.user; // Получаем информацию о пользователе из сессии
-    res.render('index', { user }); // Передаем данные пользователя в шаблон
+app.get('/', async (req, res) => {
+    const sessionUser = req.session.user; // Получаем данные о пользователе из сессии
+
+    if (!sessionUser) {
+        // Если пользователь не авторизован, возвращаем страницу без данных пользователя
+        return res.render('index', { user: null });
+    }
+
+    try {
+        // Извлекаем обновленные данные пользователя из базы данных
+        const user = await User.findOne({ username: sessionUser.username });
+
+        // Отправляем данные на страницу
+        res.render('index', { user });
+    } catch (err) {
+        console.error('Ошибка при получении данных пользователя:', err);
+        res.status(500).send('Ошибка при загрузке главной страницы');
+    }
 });
 
-app.get('/redPill', (req, res) => {
-    const user = req.session.user; // Получаем информацию о пользователе из сессии
-    res.render('redPill', { user }); // Передаем данные пользователя в шаблон
+app.get('/redPill', async (req, res) => {
+    const sessionUser = req.session.user; // Получаем данные о пользователе из сессии
+
+    if (!sessionUser) {
+        // Если пользователь не авторизован, возвращаем страницу без данных пользователя
+        return res.render('redPill', { user: null });
+    }
+
+    try {
+        // Извлекаем обновленные данные пользователя из базы данных
+        const user = await User.findOne({ username: sessionUser.username });
+
+        // Отправляем данные на страницу
+        res.render('redPill', { user });
+    } catch (err) {
+        console.error('Ошибка при получении данных пользователя:', err);
+        res.status(500).send('Ошибка при загрузке страницы');
+    }
+});
+
+app.get('/bluePill', async (req, res) => {
+    const sessionUser = req.session.user; // Получаем данные о пользователе из сессии
+
+    if (!sessionUser) {
+        // Если пользователь не авторизован, возвращаем страницу без данных пользователя
+        return res.render('bluePill', { user: null });
+    }
+
+    try {
+        // Извлекаем обновленные данные пользователя из базы данных
+        const user = await User.findOne({ username: sessionUser.username });
+
+        // Отправляем данные на страницу
+        res.render('bluePill', { user });
+    } catch (err) {
+        console.error('Ошибка при получении данных пользователя:', err);
+        res.status(500).send('Ошибка при загрузке страницы');
+    }
 });
 
 // Страница аккаунта
 app.get('/account', async (req, res) => {
-    const user = req.session.user; // Получаем данные о пользователе из сессии
+    const sessionUser = req.session.user; // Получаем данные о пользователе из сессии
 
-    if (!user) {
+    if (!sessionUser) {
         // Если пользователь не авторизован, возвращаем форму для логина
-        return res.render('account', { user: null, selectedSkin: null });
+        return res.render('account', { user: null, selectedSkins: [] });
     }
 
-    // Получаем информацию о выбитых скинах
-    const selectedSkin = user.selectedSkin;
+    try {
+        // Извлекаем обновленные данные пользователя из базы данных
+        const user = await User.findOne({ username: sessionUser.username });
 
-    // Отправляем данные на страницу
-    res.render('account', { user, selectedSkin });
+        // Получаем информацию о выбитых скинах
+        const selectedSkins = user.selectedSkins || [];
+
+        // Отправляем данные на страницу
+        res.render('account', { user, selectedSkins });
+    } catch (err) {
+        console.error('Ошибка при получении данных пользователя:', err);
+        res.status(500).send('Ошибка при загрузке аккаунта');
+    }
+});
+
+// Маршрут для открытия кейса
+app.post('/openCase', async (req, res) => {
+    const user = req.session.user; // Получаем информацию о пользователе из сессии
+
+    if (!user) {
+        return res.status(401).send('Пользователь не авторизован');
+    }
+
+    try {
+        // Извлекаем обновленные данные пользователя из базы данных
+        const currentUser = await User.findOne({ username: user.username });
+
+        console.log('Текущий баланс:', currentUser.balance); // Отладочное сообщение
+
+        // Проверяем, достаточно ли средств для открытия кейса
+        if (currentUser.balance < 1) {
+            console.error('Недостаточно средств для открытия кейса');
+            return res.status(400).json({ success: false, message: 'Недостаточно средств для открытия кейса' });
+        }
+
+        // Уменьшаем баланс на 1 монету
+        currentUser.balance -= 1;
+        await currentUser.save();
+
+        // Обновляем данные пользователя в сессии
+        req.session.user = currentUser;
+
+        // Возвращаем обновленный баланс и успех
+        res.json({ success: true, balance: currentUser.balance });
+    } catch (err) {
+        console.error('Ошибка при открытии кейса:', err);
+        res.status(500).send('Ошибка при открытии кейса');
+    }
 });
 
 // Запуск сервера

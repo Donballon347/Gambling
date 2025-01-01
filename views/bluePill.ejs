@@ -28,16 +28,16 @@
       <% if (user) { %>
          <h2 class="pill__question">Ты уверен, что хочешь этого?</h2>
          <a href="/" class="pill__decision">Сделать выбор заново</a>
-         <p class="case-cost">Стоимость кейса 1 монета</p>
+         <p class="case-cost">Стоимость кейса 3 монеты</p>
          <div class="case">
-            <img class="crate__image" src="../images/wood.png" alt="case" />
+            <img class="crate__image" src="../images/lega.png" alt="case" />
             <div class="roulette-wrapper" style="display: none;">
                <div class="center-indicator"></div>
                <div class="roulette"></div>
             </div>
          </div>
 
-         <% if (user.balance >= 1) { %>
+         <% if (user.balance >= 3) { %>
             <button class="open-button">ОТКРЫТЬ</button>
          <% } else { %>
             <p class="broke-message">Ты броук? Накинь балик!</p>

@@ -199,6 +199,10 @@ header .user-icon {
     margin: 5px 0 0;
     font-size: 12px;
 }
+.case-cost {
+    margin-top: 10px; /* Отступ сверху */
+    font-size: 19px; /* Размер шрифта, если необходимо */
+}
 
 /* --INDEX---------------------------------------------------------------------------------------------------------------- */
 .container__index {
@@ -283,4 +287,73 @@ header .user-icon {
     border-radius: 5px;
     cursor: pointer;
     font-weight: 700;
+}
+
+.inventory-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.inventory-grid .skin-card {
+    flex: 0 0 180px;
+    height: 210px;
+    margin: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    font-size: 12px;
+}
+
+.inventory-grid .card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    width: 100%;
+}
+
+.inventory-grid .card-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.inventory-grid .card-info__name .card-title,
+.inventory-grid .card-info__name .card-skin,
+.inventory-grid .card-price {
+    font-size: 15px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.burger {
+    margin-right: auto; /* Отодвигает остальные элементы вправо */
+}
+
+#user-balance {
+    margin-right: 10px; /* Отступ справа от баланса */
+    font-size: 18px; /* Размер шрифта для баланса */
+    color: #ffffff; /* Цвет текста для баланса */
+}
+
+.user-icon {
+    display: flex;
+    align-items: center;
+}
+
+.broke-message {
+    font-size: 25px; /* Увеличенный размер шрифта */
+    margin-bottom: 15px; /* Отступ снизу */
+}
+.inventory-title {
+    margin-top: 15px; /* Отступ сверху */
 }
