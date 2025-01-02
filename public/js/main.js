@@ -65,7 +65,7 @@ document.querySelector('.open-button').addEventListener('click', () => {
     { name: "Vent Rush", img: "images/skins/P90 Vent Rush.png", rarity: "rarity-purple", title: "P90", price: "77$", weight: 3 },
     { name: "Легион Анубиса", img: "images/skins/AK-47 Легион Анубиса.png", rarity: "rarity-red", title: "AK-47 ", price: "606$", weight: 2 },
     { name: "В живом цвете", img: "images/skins/M4A4 В живом цвете.png", rarity: "rarity-red", title: "M4A4" , price: "824$", weight: 2 },
-    { name: "История о драконе", img: "images/skins/AWP Dragon lore.png", rarity: "rarity-red", title: "AWP" , price: "1000000$", weight: 8 }
+    { name: "История о драконе", img: "images/skins/AWP Dragon lore.png", rarity: "rarity-red", title: "AWP" , price: "1000000$", weight: 10000 }
   ];
 
   // Определяем, на какой странице мы находимся
