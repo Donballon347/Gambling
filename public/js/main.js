@@ -34,14 +34,30 @@ document.querySelector('.open-button').addEventListener('click', () => {
   // Очищаем рулетку
   roulette.innerHTML = '';
 
-  // Данные скинов
-  const items = [
-    { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "124$", weight: 1 },
-    { name: "Шарм", img: "images/skins/MAC-10 Шарм.png", rarity: "rarity-purple", title: "MAC-10", price: "45$", weight: 1 },
-    { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "193$", weight: 1 },
-    { name: "История о драконе", img: "images/skins/AWP Dragon Lore.png", rarity: "rarity-red", title: "AWP", price: "10 000$", weight: 1 },
-    { name: "Неоновая революция", img: "images/skins/ak47.png", rarity: "rarity-red", title: "AK-47", price: "500$", weight: 1 }
+  // Массив скинов для страницы redPill
+  const redPillItems = [
+    { name: "Изоляция", img: "images/skins/Сувенирный Негев Изоляция.png", rarity: "rarity-blue", title: "Сувенирный Негев", price: "53$", weight: 1 },
+    { name: "Прозрачный полимер", img: "images/skins/Glock Прозрачный полимер.png", rarity: "rarity-blue", title: "Glock-18", price: "24$", weight: 1 },
+    { name: "Лазурный хищник", img: "images/skins/MAC-10 Лазурный хищник.png", rarity: "rarity-blue", title: "MAC-10", price: "74$", weight: 2 },
+    { name: "Analog Input", img: "images/skins/Sawed-Off Analog Input.png", rarity: "rarity-purple", title: "Sawed-Off", price: "103$", weight: 3 },
+    { name: "Взгляд в прошлое", img: "images/skins/USP-S Взгляд в прошлое.png", rarity: "rarity-purple", title: "USP-S", price: "111$", weight: 3 },
+    { name: "Плод воображения", img: "images/skins/Dual Berettas Плод воображения.png", rarity: "rarity-pink", title: "Dual Berettas", price: "185$", weight: 1 }
   ];
+
+  // Массив скинов для страницы bluePill
+  const bluePillItems = [
+    { name: "Кровавая паутина", img: "images/skins/CZ75-Auto Кровавая паутина.png", rarity: "rarity-blue", title: "CZ75-Auto", price: "123$", weight: 6 },
+    { name: "Янтарный градиент", img: "images/skins/AUG Янтарный градиент.png", rarity: "rarity-blue", title: "AUG" , price: "136$", weight: 6 },
+    { name: "Заражение", img: "images/skins/P250 Заражение.png", rarity: "rarity-blue", title: "P250", price: "202$", weight: 5 },
+    { name: "Метрополитен", img: "images/skins/SSG 08 Метрополитен.png", rarity: "rarity-purple", title: "SSG 08", price: "170$", weight: 4 },
+    { name: "Vent Rush", img: "images/skins/P90 Vent Rush.png", rarity: "rarity-purple", title: "P90", price: "77$", weight: 3 },
+    { name: "Легион Анубиса", img: "images/skins/AK-47 Легион Анубиса.png", rarity: "rarity-red", title: "AK-47 ", price: "606$", weight: 2 },
+    { name: "В живом цвете", img: "images/skins/M4A4 В живом цвете.png", rarity: "rarity-red", title: "M4A4" , price: "824$", weight: 2 }
+  ];
+
+  // Определяем, на какой странице мы находимся
+  const isRedPillPage = window.location.pathname.includes('redPill');
+  const items = isRedPillPage ? redPillItems : bluePillItems; // Используем соответствующий массив
 
   const minVisibleItems = 10; // Минимальное количество видимых скинов для длинной рулетки
   const totalItems = Math.max(minVisibleItems, items.length * 10); // Увеличиваем количество элементов
@@ -127,8 +143,11 @@ document.querySelector('.open-button').addEventListener('click', () => {
     }, 3000); // Убедитесь, что это совпадает с временем анимации
   }, 100);
 
+  // Используем существующую переменную isRedPillPage
+  const fetchUrl = isRedPillPage ? '/openRedPillCase' : '/openBluePillCase';
+
   // Пример обработки ответа от сервера после открытия кейса
-  fetch('/openCase', {
+  fetch(fetchUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

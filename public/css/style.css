@@ -357,3 +357,35 @@ header {
 .inventory-title {
     margin-top: 15px; /* Отступ сверху */
 }
+
+/* Пример стилей для формы авторизации */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; /* Отступ сверху для всей секции */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.form-section h2 {
+    margin-bottom: 50px; /* Отступ после заголовка "Авторизация" */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.form-section input {
+    margin-bottom: 10px; /* Небольшой отступ между полями ввода */
+    width: 200px; /* Ширина полей ввода */
+    padding: 10px; /* Внутренний отступ для полей ввода */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+.form-section form button {
+    margin-top: 10px; /* Отступ сверху для кнопки "Войти" */
+    padding: 10px 20px; /* Внутренний отступ для кнопки */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+#switch-to-register {
+    margin-top: 20px; /* Отступ сверху для кнопки "Нет аккаунта?" */
+    text-align: center; /* Выравнивание текста по центру */
+}

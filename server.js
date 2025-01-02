@@ -193,8 +193,8 @@ app.get('/account', async (req, res) => {
     }
 });
 
-// Маршрут для открытия кейса
-app.post('/openCase', async (req, res) => {
+// Маршрут для открытия кейса на странице redPill
+app.post('/openRedPillCase', async (req, res) => {
     const user = req.session.user; // Получаем информацию о пользователе из сессии
 
     if (!user) {
@@ -202,25 +202,42 @@ app.post('/openCase', async (req, res) => {
     }
 
     try {
-        // Извлекаем обновленные данные пользователя из базы данных
         const currentUser = await User.findOne({ username: user.username });
 
-        console.log('Текущий баланс:', currentUser.balance); // Отладочное сообщение
-
-        // Проверяем, достаточно ли средств для открытия кейса
         if (currentUser.balance < 1) {
-            console.error('Недостаточно средств для открытия кейса');
             return res.status(400).json({ success: false, message: 'Недостаточно средств для открытия кейса' });
         }
 
-        // Уменьшаем баланс на 1 монету
         currentUser.balance -= 1;
         await currentUser.save();
 
-        // Обновляем данные пользователя в сессии
         req.session.user = currentUser;
+        res.json({ success: true, balance: currentUser.balance });
+    } catch (err) {
+        console.error('Ошибка при открытии кейса:', err);
+        res.status(500).send('Ошибка при открытии кейса');
+    }
+});
 
-        // Возвращаем обновленный баланс и успех
+// Маршрут для открытия кейса на странице bluePill
+app.post('/openBluePillCase', async (req, res) => {
+    const user = req.session.user;
+
+    if (!user) {
+        return res.status(401).send('Пользователь не авторизован');
+    }
+
+    try {
+        const currentUser = await User.findOne({ username: user.username });
+
+        if (currentUser.balance < 3) {
+            return res.status(400).json({ success: false, message: 'Недостаточно средств для открытия кейса' });
+        }
+
+        currentUser.balance -= 3;
+        await currentUser.save();
+
+        req.session.user = currentUser;
         res.json({ success: true, balance: currentUser.balance });
     } catch (err) {
         console.error('Ошибка при открытии кейса:', err);
