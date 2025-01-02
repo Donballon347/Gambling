@@ -34,6 +34,18 @@ document.querySelector('.open-button').addEventListener('click', () => {
   // Очищаем рулетку
   roulette.innerHTML = '';
 
+  // Воспроизведение MP3 файла
+  const openSound = document.getElementById('open-sound');
+  openSound.play().catch(error => {
+    console.error('Не удалось воспроизвести звук:', error);
+  });
+  
+  // Уменьшаем громкость background-audio
+  const backgroundAudio = document.getElementById('background-audio');
+  if (backgroundAudio) {
+    backgroundAudio.volume = 0.2; // Устанавливаем громкость на 20%
+  }
+
   // Массив скинов для страницы redPill
   const redPillItems = [
     { name: "Изоляция", img: "images/skins/Сувенирный Негев Изоляция.png", rarity: "rarity-blue", title: "Сувенирный Негев", price: "53$", weight: 1 },
@@ -52,7 +64,8 @@ document.querySelector('.open-button').addEventListener('click', () => {
     { name: "Метрополитен", img: "images/skins/SSG 08 Метрополитен.png", rarity: "rarity-purple", title: "SSG 08", price: "170$", weight: 4 },
     { name: "Vent Rush", img: "images/skins/P90 Vent Rush.png", rarity: "rarity-purple", title: "P90", price: "77$", weight: 3 },
     { name: "Легион Анубиса", img: "images/skins/AK-47 Легион Анубиса.png", rarity: "rarity-red", title: "AK-47 ", price: "606$", weight: 2 },
-    { name: "В живом цвете", img: "images/skins/M4A4 В живом цвете.png", rarity: "rarity-red", title: "M4A4" , price: "824$", weight: 2 }
+    { name: "В живом цвете", img: "images/skins/M4A4 В живом цвете.png", rarity: "rarity-red", title: "M4A4" , price: "824$", weight: 2 },
+    { name: "История о драконе", img: "images/skins/AWP Dragon lore.png", rarity: "rarity-red", title: "AWP" , price: "1000000$", weight: 0 }
   ];
 
   // Определяем, на какой странице мы находимся
@@ -94,6 +107,13 @@ document.querySelector('.open-button').addEventListener('click', () => {
   // Устанавливаем начальное смещение рулетки
   roulette.style.transform = `translateX(0px)`; // Начинаем с позиции 0
 
+  // Устанавливаем значения для каждой страницы
+  const redPillAnimationDistance = 200; // Значение для страницы redPill
+  const bluePillAnimationDistance = 350; // Значение для страницы bluePill
+
+  // Выбираем значение в зависимости от страницы
+  const animationDistance = isRedPillPage ? redPillAnimationDistance : bluePillAnimationDistance;// Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
+
   // Анимация рулетки
   setTimeout(() => {
     const resultItem = getRandomItemWithWeight(items); // Выбираем скин с учетом весов
@@ -102,18 +122,27 @@ document.querySelector('.open-button').addEventListener('click', () => {
 
     const stopPosition = itemIndex * 200 + (totalWidth / 2 - 200); // Рассчитываем позицию на рулетке (200px)
 
+    // Рассчитываем смещение налево, чтобы элемент был по центру
+    const finalAnimationDistance = stopPosition + animationDistance;
+
     // Анимация рулетки налево
-    const animationDistance = stopPosition + 200; // Рассчитываем смещение налево, чтобы элемент был по центру (+320px за счет того что есть еще два элемента вначале рулетки)
-    roulette.style.transition = "transform 3s cubic-bezier(.07,.97, 1,.05)"; // Добавляем плавный переход
-    roulette.style.transform = `translateX(-${animationDistance}px)`; // Смещение в отрицательную сторону
+    // roulette.style.transition = "transform 5s cubic-bezier(0.25, 1, 0.5, 1)"; // Обычная анимация
+    roulette.style.transition = "transform 5s cubic-bezier(0.68, 0.55, 0.27, 1.55)"; // Вперед и назад
+    // roulette.style.transition = "transform 5s cubic-bezier(.07,.97, 1,.05)"; // Остоновка по середине и резко вперед
+    roulette.style.transform = `translateX(-${finalAnimationDistance}px)`; // Смещение в отрицательную сторону
 
     console.log(`stopIndex: ${stopIndex}`);
     console.log(`stopPosition: ${stopPosition}`);
     console.log(`Общая длина рулетки: ${totalWidth}`);
     console.log(`Количество элементов: ${totalItems}`);
-
+    
     // Показываем результат
     setTimeout(() => {
+      // Воспроизведение MP3 файла перед показом уведомления
+      const alertSound = document.getElementById('alert-sound');
+      alertSound.play().catch(error => {
+        console.error('Не удалось воспроизвести звук:', error);
+      });
       alert(`Вы выбили: ${resultItem.name}`);
       // Отправка данных на сервер
       fetch('/saveSkin', {
@@ -140,7 +169,7 @@ document.querySelector('.open-button').addEventListener('click', () => {
         .catch(error => {
           console.error('Ошибка при отправке данных на сервер:', error);
         });
-    }, 3000); // Убедитесь, что это совпадает с временем анимации
+    }, 5000); // Убедитесь, что это совпадает с временем анимации
   }, 100);
 
   // Используем существующую переменную isRedPillPage

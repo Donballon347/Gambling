@@ -12,12 +12,18 @@
 
 <body>
   <header>
-    <div class="burger">---</div>
+    <div class="burger">
+      <span id="play-icon" style="display: none;">▶</span>
+      <span id="pause-icon">╳</span>
+      <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="1">
+    </div>
     <h1>
       <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
     </h1>
     <% if (user) { %>
-      <p id="user-balance"><%= user.balance %> монет</p>
+      <p id="user-balance" class="user-balance-container">
+        <%= user.balance %> 🪙
+      </p>
     <% } %>
     <div class="user-icon">
       <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
@@ -38,10 +44,15 @@
           <a href="bluePill"><img src="images/blue_pillow.png" alt="blue pillow" /></a>
         </div>
       </div>
-    <% } else { %>
-      <p>Для доступа к содержимому, пожалуйста, <a href="/account">авторизуйтесь</a>.</p>
-    <% } %>
-  </div>
+    </div>
+    <!-- Добавляем аудио элемент -->
+    <audio id="background-audio" src="/sounds/Indila - Tourner Dans Le Vide.mp3" preload="auto"></audio>
+    <script src="js/audio.js"></script>
+  <% } else { %>
+    <audio id="background-audio" src="/sounds/lets-go-gambling.mp3" preload="auto"></audio>
+    <script src="js/audio.js"></script>
+    <p>Для доступа к содержимому, пожалуйста, <a href="/account">авторизуйтесь</a>.</p>
+  <% } %>
 </body>
 
 </html>

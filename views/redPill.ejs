@@ -12,17 +12,23 @@
 
 <body>
    <header>
-      <div class="burger">---</div>
+      <div class="burger">
+         <span id="play-icon" style="display: none;">▶</span>
+         <span id="pause-icon">╳</span>
+         <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.05" value="1">
+       </div>
       <h1>
-        <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
+         <a href="/" class="header__logo">ГЭМБЛИНГ - на языке богатых</a>
       </h1>
       <% if (user) { %>
-        <p id="user-balance"><%= user.balance %> монет</p>
-      <% } %>
-      <div class="user-icon">
-        <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
-      </div>
-    </header>
+         <p id="user-balance">
+            <%= user.balance %> 🪙
+         </p>
+         <% } %>
+            <div class="user-icon">
+               <a href="/account"><img src="images/LK-logo.png" alt="ЛК"></a>
+            </div>
+   </header>
 
    <div class="container container_pill">
       <% if (user) { %>
@@ -37,108 +43,113 @@
             </div>
          </div>
 
-         <% if (user.balance >= 1) { %>
+         <% if (user.balance>= 1) { %>
             <button class="open-button">ОТКРЫТЬ</button>
-         <% } else { %>
-            <p class="broke-message">Ты броук? Накинь балик!</p>
-         <% } %>
+            <% } else { %>
+               <p class="broke-message">Ты броук? Накинь балик!</p>
+               <% } %>
 
-         <h2>Содержимое кейса</h2>
-         <div class="case-content">
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/Сувенирный Негев Изоляция.png" alt="Glock-18" />
-               </div>
-               <div class="card-info rarity-blue">
-                  <div class="card-info__name">
-                     <p class="card-title">Сувенирный Негев</p>
-                     <p class="card-skin">Изоляция</p>
-                  </div>
-               </div>
-            </div>
+                  <h2>Содержимое кейса</h2>
+                  <div class="case-content">
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/Сувенирный Негев Изоляция.png" alt="Glock-18" />
+                        </div>
+                        <div class="card-info rarity-blue">
+                           <div class="card-info__name">
+                              <p class="card-title">Сувенирный Негев</p>
+                              <p class="card-skin">Изоляция</p>
+                           </div>
+                        </div>
+                     </div>
 
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/Glock Прозрачный полимер.png" alt="Glock-18" />
-               </div>
-               <div class="card-info rarity-blue">
-                  <div class="card-info__name">
-                     <p class="card-title">Glock-18</p>
-                     <p class="card-skin">Прозрачный полимер</p>
-                  </div>
-               </div>
-            </div>
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/Glock Прозрачный полимер.png" alt="Glock-18" />
+                        </div>
+                        <div class="card-info rarity-blue">
+                           <div class="card-info__name">
+                              <p class="card-title">Glock-18</p>
+                              <p class="card-skin">Прозрачный полимер</p>
+                           </div>
+                        </div>
+                     </div>
 
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/MAC-10 Лазурный хищник.png" alt="MAC-10" />
-               </div>
-               <div class="card-info rarity-blue">
-                  <div class="card-info__name">
-                     <p class="card-title">MAC-10</p>
-                     <p class="card-skin">Лазурный хищник</p>
-                  </div>
-               </div>
-            </div>
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/MAC-10 Лазурный хищник.png" alt="MAC-10" />
+                        </div>
+                        <div class="card-info rarity-blue">
+                           <div class="card-info__name">
+                              <p class="card-title">MAC-10</p>
+                              <p class="card-skin">Лазурный хищник</p>
+                           </div>
+                        </div>
+                     </div>
 
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/Sawed-Off Analog Input.png" alt="DB" />
-               </div>
-               <div class="card-info rarity-purple">
-                  <div class="card-info__name">
-                     <p class="card-title">Sawed-Off</p>
-                     <p class="card-skin">Аналоговый ввод</p>
-                  </div>
-               </div>
-            </div>
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/Sawed-Off Analog Input.png" alt="DB" />
+                        </div>
+                        <div class="card-info rarity-purple">
+                           <div class="card-info__name">
+                              <p class="card-title">Sawed-Off</p>
+                              <p class="card-skin">Аналоговый ввод</p>
+                           </div>
+                        </div>
+                     </div>
 
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/USP-S Взгляд в прошлое.png" alt="USP-S" />
-               </div>
-               <div class="card-info rarity-purple">
-                  <div class="card-info__name">
-                     <p class="card-title">USP-S</p>
-                     <p class="card-skin">Взгляд в прошлое</p>
-                  </div>
-               </div>
-            </div>
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/USP-S Взгляд в прошлое.png" alt="USP-S" />
+                        </div>
+                        <div class="card-info rarity-purple">
+                           <div class="card-info__name">
+                              <p class="card-title">USP-S</p>
+                              <p class="card-skin">Взгляд в прошлое</p>
+                           </div>
+                        </div>
+                     </div>
 
-            <div class="skin-card">
-               <div class="card-background">
-                  <img src="../images/snakes.webp" alt="card-background" />
-               </div>
-               <div class="card-image">
-                  <img src="../images/skins/Dual Berettas Плод воображения.png" alt="Dual Berettas" />
-               </div>
-               <div class="card-info rarity-pink">
-                  <div class="card-info__name">
-                     <p class="card-title">Dual Berettas</p>
-                     <p class="card-skin">Плод воображения</p>
+                     <div class="skin-card">
+                        <div class="card-background">
+                           <img src="../images/snakes.webp" alt="card-background" />
+                        </div>
+                        <div class="card-image">
+                           <img src="../images/skins/Dual Berettas Плод воображения.png" alt="Dual Berettas" />
+                        </div>
+                        <div class="card-info rarity-pink">
+                           <div class="card-info__name">
+                              <p class="card-title">Dual Berettas</p>
+                              <p class="card-skin">Плод воображения</p>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-               </div>
-            </div>
-         </div>
-         <% } else { %>
-           <p>Для доступа к содержимому, пожалуйста, <a href="/account">авторизуйтесь</a>.</p>
-         <% } %>
+                  <% } else { %>
+                     <p>Для доступа к содержимому, пожалуйста, <a href="/account">авторизуйтесь</a>.</p>
+                     <% } %>
    </div>
+   <!-- Добавляем аудио элемент -->
+   <audio id="alert-sound" src="/sounds/case-opened.mp3" preload="auto"></audio>
+   <audio id="open-sound" src="/sounds/case-opening.mp3" preload="auto"></audio>
+   <audio id="background-audio" src="/sounds/Indila - Dernière Danse (Techno Mix) Ft Bennett.mp3" preload="auto" autoplay loop></audio>
+   <script src="js/audio.js"></script>
    <script src="js/main.js"></script>
 </body>
 

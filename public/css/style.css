@@ -199,9 +199,12 @@ header .user-icon {
     margin: 5px 0 0;
     font-size: 12px;
 }
+
 .case-cost {
-    margin-top: 10px; /* Отступ сверху */
-    font-size: 19px; /* Размер шрифта, если необходимо */
+    margin-top: 10px;
+    /* Отступ сверху */
+    font-size: 19px;
+    /* Размер шрифта, если необходимо */
 }
 
 /* --INDEX---------------------------------------------------------------------------------------------------------------- */
@@ -336,13 +339,34 @@ header {
 }
 
 .burger {
-    margin-right: auto; /* Отодвигает остальные элементы вправо */
+    margin-right: auto;
+    /* Отодвигает остальные элементы вправо */
+}
+
+.burger span {
+    color: white;
+    /* Устанавливаем цвет иконок на белый */
+    background: none;
+    /* Убираем фон */
+    font-size: 24px;
+    /* Размер иконок */
+    cursor: pointer;
+    /* Указатель мыши при наведении */
+    margin: 0 5px; /* Добавляем отступы между иконками */
+}
+
+.volume-slider {
+    width: 100px; /* Ширина ползунка */
+    margin-left: 10px; /* Отступ слева */
 }
 
 #user-balance {
-    margin-right: 10px; /* Отступ справа от баланса */
-    font-size: 18px; /* Размер шрифта для баланса */
-    color: #ffffff; /* Цвет текста для баланса */
+    margin-right: 10px;
+    /* Отступ справа от баланса */
+    font-size: 18px;
+    /* Размер шрифта для баланса */
+    color: #ffffff;
+    /* Цвет текста для баланса */
 }
 
 .user-icon {
@@ -351,11 +375,15 @@ header {
 }
 
 .broke-message {
-    font-size: 25px; /* Увеличенный размер шрифта */
-    margin-bottom: 15px; /* Отступ снизу */
+    font-size: 25px;
+    /* Увеличенный размер шрифта */
+    margin-bottom: 15px;
+    /* Отступ снизу */
 }
+
 .inventory-title {
-    margin-top: 15px; /* Отступ сверху */
+    margin-top: 15px;
+    /* Отступ сверху */
 }
 
 /* Пример стилей для формы авторизации */
@@ -363,29 +391,54 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px; /* Отступ сверху для всей секции */
-    text-align: center; /* Выравнивание текста по центру */
+    margin-top: 50px;
+    /* Отступ сверху для всей секции */
+    text-align: center;
+    /* Выравнивание текста по центру */
 }
 
 .form-section h2 {
-    margin-bottom: 50px; /* Отступ после заголовка "Авторизация" */
-    text-align: center; /* Выравнивание текста по центру */
+    margin-bottom: 50px;
+    /* Отступ после заголовка "Авторизация" */
+    text-align: center;
+    /* Выравнивание текста по центру */
 }
 
 .form-section input {
-    margin-bottom: 10px; /* Небольшой отступ между полями ввода */
-    width: 200px; /* Ширина полей ввода */
-    padding: 10px; /* Внутренний отступ для полей ввода */
-    text-align: center; /* Выравнивание текста по центру */
+    margin-bottom: 10px;
+    /* Небольшой отступ между полями ввода */
+    width: 200px;
+    /* Ширина полей ввода */
+    padding: 10px;
+    /* Внутренний отступ для полей ввода */
+    text-align: center;
+    /* Выравнивание текста по центру */
 }
 
 .form-section form button {
-    margin-top: 10px; /* Отступ сверху для кнопки "Войти" */
-    padding: 10px 20px; /* Внутренний отступ для кнопки */
-    text-align: center; /* Выравнивание текста по центру */
+    margin-top: 10px;
+    /* Отступ сверху для кнопки "Войти" */
+    padding: 10px 20px;
+    /* Внутренний отступ для кнопки */
+    text-align: center;
+    /* Выравнивание текста по центру */
 }
 
 #switch-to-register {
-    margin-top: 20px; /* Отступ сверху для кнопки "Нет аккаунта?" */
-    text-align: center; /* Выравнивание текста по центру */
+    margin-top: 20px;
+    /* Отступ сверху для кнопки "Нет аккаунта?" */
+    text-align: center;
+    /* Выравнивание текста по центру */
+}
+
+.user-balance-container {
+    display: flex;
+    align-items: center; /* Вертикальное центрирование */
+    justify-content: center; /* Горизонтальное центрирование */
+    position: relative;
+}
+
+.vlast__topG{
+    width: 50px;
+    height: 50px;
 }
