@@ -1,8 +1,9 @@
 {
   "name": "gambling",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,10 @@
     "url": "https://github.com/Donballon347/Gambling/issues"
   },
   "homepage": "https://github.com/Donballon347/Gambling#readme",
-  "description": "",
+  "description": "Гэмблинг это не игра, это жизнь",
+  "engines": {
+    "node": ">=18.x"
+  },
   "dependencies": {
     "body-parser": "^1.20.3",
     "ejs": "^3.1.10",
